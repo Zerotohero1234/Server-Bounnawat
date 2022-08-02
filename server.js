@@ -22,6 +22,12 @@ app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/category",categoriesRoute)
 
+// basic route
+app.get("/", (req, res) => {
+    console.log("Hi")
+    res.send("Hello Anouwath")
+})
+
 // ERROR MIDDLEWARE
 app.use(notFound);
 app.use(errorHandler);
