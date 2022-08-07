@@ -21,6 +21,7 @@ userRouter.post(
         isAdmin: user.isAdmin,
         token: generateToken(user._id),
         createdAt: user.createdAt,
+        shippingAddress: user.shippingAddress
       });
     } else {
       res.status(401);
@@ -77,6 +78,7 @@ userRouter.get(
         email: user.email,
         isAdmin: user.isAdmin,
         createdAt: user.createdAt,
+        shippingAddress: user.shippingAddress
       });
     } else {
       res.status(404);
@@ -122,6 +124,37 @@ userRouter.get(
   asyncHandler(async (req, res) => {
     const users = await User.find({});
     res.json(users);
+  })
+);
+
+// Address
+userRouter.put(
+  "/address",
+  protect,
+  asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+      user.name = req.body.name || user.name;
+      user.email = req.body.email || user.email;
+      if (req.body.password) {
+        user.password = req.body.password;
+      }
+      user.shippingAddress = req.body.shippingAddress;
+      const updatedUser = await user.save();
+      res.json({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        isAdmin: updatedUser.isAdmin,
+        createdAt: updatedUser.createdAt,
+        shippingAddress : updatedUser.shippingAddress,
+        token: generateToken(updatedUser._id),
+      });
+    } else {
+      res.status(404);
+      throw new Error("User not found");
+    }
   })
 );
 

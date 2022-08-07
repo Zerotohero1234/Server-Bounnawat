@@ -21,6 +21,12 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    shippingAddress: {
+      address: { type: String, required: true, default:"vientaine" },
+      city: { type: String, required: true, default:"vientiane capital" },
+      postalCode: { type: String, default:"85620" },
+      country: { type: String, required: true, default: "laos" },
+    },
   },
   {
     timestamps: true,
