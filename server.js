@@ -20,13 +20,13 @@ app.use("/api/import", ImportData);
 app.use("/api/products", productRoute);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
-app.use("/api/category",categoriesRoute)
+app.use("/api/category", categoriesRoute);
 
 // basic route
 app.get("/", (req, res) => {
-    console.log("Hi")
-    res.send("Hello Anouwath")
-})
+  console.log("Hi");
+  res.send("Hello new Anouwath");
+});
 
 // ERROR MIDDLEWARE
 app.use(notFound);
